@@ -1,0 +1,33 @@
+{
+  "name": "swapi",
+  "version": "1.0.0",
+  "description": "ReactJS SPA SWAPI",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint ./datacore-crud-manager-webapp-ui/src",
+    "build": "webpack",
+    "start": "webpack-dev-server --open"
+  },
+  "author": "Dima Ivanov",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.12.3",
+    "@babel/preset-env": "^7.12.1",
+    "@babel/preset-react": "^7.12.1",
+    "babel-loader": "^8.1.0",
+    "eslint": "^7.10.0",
+    "eslint-plugin-react": "^7.21.5",
+    "redux-devtools": "^3.7.0",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "dependencies": {
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-redux": "^7.2.2",
+    "redux": "^4.0.5",
+    "redux-saga": "^1.1.3"
+  }
+}
