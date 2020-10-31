@@ -8,6 +8,7 @@ import createSagaMiddleware from 'redux-saga';
 import mainReduser from './reducers/mainReduser';
 import fetchPlanetsData from './sagas/fetchPlanetsData';
 import { BrowserRouter as Router } from "react-router-dom";
+import { ThemeProvider, CSSReset } from "@chakra-ui/core";
 
 const sagaMiddleware = createSagaMiddleware();
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -22,10 +23,13 @@ const store = createStore(
 sagaMiddleware.run(fetchPlanetsData);
 
 ReactDOM.render(
-  <Provider store={store}>
-    <Router>
-      <Main />
-    </Router>
-  </Provider>,
+  <ThemeProvider>
+    <Provider store={store}>
+      <Router>
+        <CSSReset />
+        <Main />
+      </Router>
+    </Provider>
+  </ThemeProvider>,
   document.getElementById("root")
 );

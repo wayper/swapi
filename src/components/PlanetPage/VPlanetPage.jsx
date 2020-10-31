@@ -1,5 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {
+  Box,
+  Heading,
+  Text,
+  List,
+  ListItem,
+  ListIcon,
+  Link,
+} from "@chakra-ui/core";
 
 const VPlanetPage = ({
   name,
@@ -11,22 +20,58 @@ const VPlanetPage = ({
   population,
   residents,
 }) => (
-  <div onClick={() => console.log('click card')}>
-    <div>Имя: {name}</div>
-    <div>Период оборота: {rotation_period}</div>
-    <div>Диаметр: {diameter}</div>
-    <div>Климат: {climate}</div>
-    <div>Гравитация: {gravity}</div>
-    <div>Тип местности: {terrain}</div>
-    <div>Население: {population}</div>
-    <div>Известные жители:
-      <ul>
-        {residents.map((resident) => (
-          <li key={`resident-${resident}`}>{resident}</li>
-        ))}
-      </ul>
-    </div>
-  </div>
+  <Box p={5} shadow="md" borderWidth="1px" bg="yellow.50" w="100%" rounded="lg" color="white" mt={3}>
+    <Heading as="h3" color="yellow.700">{name}</Heading>
+    <Box d="flex">
+      <Text fontWeight="bold" color="yellow.700" mt={4} mr={2}>Период оборота:</Text>
+      <Text color="yellow.700" mt={4}>{rotation_period}</Text>
+    </Box>
+    <Box d="flex">
+      <Text fontWeight="bold" color="yellow.700" mt={4} mr={2}>Диаметр:</Text>
+      <Text color="yellow.700" mt={4}>{diameter}</Text>
+    </Box>
+    <Box d="flex">
+      <Text fontWeight="bold" color="yellow.700" mt={4} mr={2}>Климат:</Text>
+      <Text color="yellow.700" mt={4}>{climate}</Text>
+    </Box>
+    <Box d="flex">
+      <Text fontWeight="bold" color="yellow.700" mt={4} mr={2}>Гравитация:</Text>
+      <Text color="yellow.700" mt={4}>{gravity}</Text>
+    </Box>
+    <Box d="flex">
+      <Text fontWeight="bold" color="yellow.700" mt={4} mr={2}>Тип местности:</Text>
+      <Text color="yellow.700" mt={4}>{terrain}</Text>
+    </Box>
+    <Box d="flex">
+      <Text fontWeight="bold" color="yellow.700" mt={4} mr={2}>Население:</Text>
+      <Text color="yellow.700" mt={4}>{population}</Text>
+    </Box>
+    {residents && residents.length
+      ? (
+          <Box>
+            <Text fontWeight="bold" color="yellow.700" mt={4} mr={2}>Известные жители:</Text>
+            <List spacing={3} p={2}>
+              {
+                residents.map((resident) => (
+                  <ListItem key={`resident-${resident}`}>
+                    <ListIcon icon="link" color="green.500" />
+                    <Link href={resident} isExternal>
+                      <Text  as="i" color="yellow.400">{resident}</Text>
+                    </Link>
+                  </ListItem>
+                ))
+              }
+            </List>
+          </Box>
+      )
+      : (
+        <Box d="flex">
+          <Text fontWeight="bold" color="yellow.700" mt={4} mr={2}>Известные жители:</Text>
+          <Text color="yellow.700" mt={4}>Неизвесно!</Text>
+        </Box>
+      )
+    }
+  </Box>
 );
 
 VPlanetPage.propTypes = {

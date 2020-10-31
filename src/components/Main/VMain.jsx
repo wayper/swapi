@@ -5,6 +5,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import { Box, Heading } from "@chakra-ui/core";
 import CardsList from '../CardsList';
 import PlanetPage from '../PlanetPage';
 
@@ -17,12 +18,12 @@ const VMain = ({ fetchPlanetsData, data }) => {
   }, []);
 
   return (
-    <div id="app-main">
-      <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-      </ul>
+    <Box>
+      <Link to="/">
+        <Box d="flex" justifyContent="center">
+          <Heading as="h2" size="xl">Home</Heading>
+        </Box>
+      </Link>
       <Switch>
         <Route exact path="/">
           <CardsList />
@@ -35,7 +36,7 @@ const VMain = ({ fetchPlanetsData, data }) => {
           ))
         )}
       </Switch>
-    </div>
+    </Box>
   )
 };
 

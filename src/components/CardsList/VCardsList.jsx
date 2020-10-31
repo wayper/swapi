@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Box } from "@chakra-ui/core";
 import PlanetCard from '../PlanetCard';
 
 const regexp = /\D/g;
@@ -19,7 +20,11 @@ const VCardsList = ({ data }) => {
       population={population}
     />
   ))
-  return list;
+  return (
+    <Box h="90vh" overflow="auto">
+      {list}
+    </Box>
+  );
 }
 
 VCardsList.propTypes = {
