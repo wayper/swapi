@@ -1,11 +1,11 @@
 import VMain from '../components/Main/VMain';
 import { connect } from 'react-redux';
 import {
-  fetchPlanetsData,
+  fetchLocalData,
 } from '../actions';
 
 const mapStateToProps = ({ planetsData }) => {
-  const data = planetsData && planetsData.data && planetsData.data.results || [];
+  const data = planetsData || [];
 
   return ({
     data
@@ -13,7 +13,7 @@ const mapStateToProps = ({ planetsData }) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchPlanetsData: () => dispatch(fetchPlanetsData()),
+  fetchLocalData: () => dispatch(fetchLocalData()),
 });
 
 export default connect(

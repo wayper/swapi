@@ -8,13 +8,12 @@ import {
 import { Box, Heading } from "@chakra-ui/core";
 import CardsList from '../CardsList';
 import PlanetPage from '../PlanetPage';
+import NavigationControlPanel from '../NavigationControlPanel';
 
-const regexp = /\D/g;
-
-const VMain = ({ fetchPlanetsData, data }) => {
+const VMain = ({ fetchLocalData, data }) => {
 
   useEffect(() => {
-    fetchPlanetsData();
+    fetchLocalData();
   }, []);
 
   return (
@@ -27,10 +26,14 @@ const VMain = ({ fetchPlanetsData, data }) => {
       <Switch>
         <Route exact path="/">
           <CardsList />
+          <NavigationControlPanel />
         </Route>
         {(
           data.map((dataItem, i) => (
-            <Route key={`page-${i}`} path={`/planet-page/${dataItem.url.replace(regexp, "")}`}>
+            <Route
+              key={`page-${i}`}
+              path={`/planet-page/${dataItem.id}`}
+            >
               <PlanetPage {...dataItem} />
             </Route>
           ))
@@ -42,12 +45,12 @@ const VMain = ({ fetchPlanetsData, data }) => {
 
 VMain.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object),
-  fetchPlanetsData: PropTypes.func,
+  fetchLocalData: PropTypes.func,
 };
 
 VMain.defaultProps = {
   data: [],
-  fetchPlanetsData: () => {},
+  fetchLocalData: () => {},
 };
 
 export default VMain;

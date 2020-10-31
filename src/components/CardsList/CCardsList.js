@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import VCardsList from './VCardsList';
 
 const mapStateToProps = ({ planetsData }) => {
-  const data = planetsData && planetsData.data && planetsData.data.results || [];
+  const data = planetsData || [];
   
   return {
     data,
