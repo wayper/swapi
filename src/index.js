@@ -7,6 +7,7 @@ import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
 import mainReduser from './reducers/mainReduser';
 import fetchPlanetsData from './sagas/fetchPlanetsData';
+import { BrowserRouter as Router } from "react-router-dom";
 
 const sagaMiddleware = createSagaMiddleware();
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -22,7 +23,9 @@ sagaMiddleware.run(fetchPlanetsData);
 
 ReactDOM.render(
   <Provider store={store}>
-    <Main />
+    <Router>
+      <Main />
+    </Router>
   </Provider>,
   document.getElementById("root")
 );
