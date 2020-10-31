@@ -7,7 +7,6 @@ const VNavigationControlPanel = ({
   previous,
   fetchLocalData,
 }) => {
-  console.log(next);
 
   const onPrevPage = () => {
     fetchLocalData(previous);

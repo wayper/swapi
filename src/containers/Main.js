@@ -4,10 +4,11 @@ import {
   fetchLocalData,
 } from '../actions';
 
-const mapStateToProps = ({ planetsData }) => {
+const mapStateToProps = ({ fetching, planetsData }) => {
   const data = planetsData || [];
 
   return ({
+    fetching,
     data
   });
 };

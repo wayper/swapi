@@ -2,6 +2,9 @@ import { takeLatest, put, call } from 'redux-saga/effects';
 import getData from '../utils/getData';
 import { FETCH_LOCAL_DATA } from '../actions/types';
 import {
+  setFetchingLoading,
+  setFetchingSuccess,
+  setFetchingErrored,
   savePlanetsData,
   setNavigation,
 } from '../actions';
@@ -10,7 +13,7 @@ const START_URL = 'https://swapi.dev/api/planets/';
 
 export function* fetchLocalData(actions) {
 
-  // Loading ...
+  yield put(setFetchingLoading());
 
   const url = actions.payload && actions.payload.url;
 
@@ -29,15 +32,15 @@ export function* fetchLocalData(actions) {
         previous,
       }))
 
-      // Stop loading
+      yield put(setFetchingSuccess());
     }
 
 
   } catch (error) {
 
-    console.log();
+    console.log(error);
 
-    // Stop loading
+    yield put(setFetchingErrored());
 
     // Error message
   }

@@ -5,12 +5,12 @@ import {
   Route,
   Link
 } from "react-router-dom";
-import { Box, Heading } from "@chakra-ui/core";
+import { Box, Heading, Spinner } from "@chakra-ui/core";
 import CardsList from '../CardsList';
 import PlanetPage from '../PlanetPage';
 import NavigationControlPanel from '../NavigationControlPanel';
 
-const VMain = ({ fetchLocalData, data }) => {
+const VMain = ({ fetching: { status }, fetchLocalData, data }) => {
 
   useEffect(() => {
     fetchLocalData();
@@ -25,7 +25,17 @@ const VMain = ({ fetchLocalData, data }) => {
       </Link>
       <Switch>
         <Route exact path="/">
-          <CardsList />
+          {(
+            status == 'loading'
+              ? <Spinner
+                  thickness="4px"
+                  speed="0.65s"
+                  emptyColor="gray.200"
+                  color="blue.500"
+                  size="xl"
+                />
+              : <CardsList />
+          )}
           <NavigationControlPanel />
         </Route>
         {(
@@ -44,11 +54,13 @@ const VMain = ({ fetchLocalData, data }) => {
 };
 
 VMain.propTypes = {
+  fetching: PropTypes.objectOf(PropTypes.string),
   data: PropTypes.arrayOf(PropTypes.object),
   fetchLocalData: PropTypes.func,
 };
 
 VMain.defaultProps = {
+  fetching: {},
   data: [],
   fetchLocalData: () => {},
 };
