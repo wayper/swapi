@@ -6,11 +6,46 @@ import {
 } from "@chakra-ui/core";
 
 const VNotFoundPage = () => (
-  <Box p={5} shadow="md" borderWidth="1px" bg="yellow.50" w="100%" rounded="lg" color="white" mt={3}>
-    <Heading as="h2" color="yellow.700">404</Heading>
-    <Box d="flex">
-      <Text fontWeight="bold" color="yellow.700" mt={4} mr={2}>Что-то пошло не так!</Text>
-      <Text color="yellow.700" mt={4}>Не возможно отобразиь страницу!</Text>
+  <Box
+    d="flex"
+    flexDirection="column"
+    justifyContent="center"
+    alignItems="center"
+    flexGrow={1}
+    p={5}
+    shadow="md"
+    borderWidth="1px"
+    bg="yellow.50"
+    rounded="lg"
+    color="white"
+  >
+    <Heading
+      as="h2"
+      fontSize="6xl"
+      color="yellow.700"
+    >
+      404
+    </Heading>
+    <Box
+      d="flex"
+      flexDirection="column"
+      justifyContent="center"
+      alignItems="center"
+    >
+      <Text
+        fontSize="4xl"
+        fontWeight="bold"
+        color="yellow.700"
+        mt={4}
+      >
+        Что-то пошло не так!
+      </Text>
+      <Text
+        color="yellow.700"
+        fontSize="3xl"
+      >
+        Страница не найдена
+      </Text>
     </Box>
   </Box>
 );

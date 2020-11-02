@@ -17,7 +17,12 @@ const VpaginationControlPanel = ({
   }
 
   return (
-    <ButtonGroup d="flex" justifyContent="center" spacing={4}>
+    <ButtonGroup
+      d="flex"
+      justifyContent="center"
+      spacing={4}
+      p={4}
+    >
       <Button
         leftIcon="arrow-left"
         variantColor="teal"

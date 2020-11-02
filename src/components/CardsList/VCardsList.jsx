@@ -21,7 +21,7 @@ const VCardsList = ({ data }) => {
     />
   ))
   return (
-    <Box h="85vh" overflow="auto">
+    <Box flexGrow={1} overflow="auto">
       {list}
     </Box>
   );

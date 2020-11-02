@@ -20,7 +20,17 @@ const VPlanetPage = ({
   population,
   residents,
 }) => (
-  <Box p={5} shadow="md" borderWidth="1px" bg="yellow.50" w="100%" rounded="lg" color="white" mt={3}>
+  <Box
+    flexGrow={1}
+    p={5}
+    shadow="md"
+    borderWidth="1px"
+    bg="yellow.50"
+    w="100%"
+    rounded="lg"
+    color="white"
+    mt={3}
+  >
     <Heading as="h3" color="yellow.700">{name}</Heading>
     <Box d="flex">
       <Text fontWeight="bold" color="yellow.700" mt={4} mr={2}>Период оборота:</Text>
