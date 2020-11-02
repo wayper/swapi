@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
 import fetching from './fetching';
 import planetsData from './planetsData';
-import navigation from './navigation';
+import pagination from './pagination';
 
 const mainReduser = combineReducers({
   fetching,
   planetsData,
-  navigation,
+  pagination,
 });
 
 export default mainReduser;

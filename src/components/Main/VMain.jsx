@@ -8,7 +8,8 @@ import {
 import { Box, Heading, Spinner } from "@chakra-ui/core";
 import CardsList from '../CardsList';
 import PlanetPage from '../PlanetPage';
-import NavigationControlPanel from '../NavigationControlPanel';
+import NotFoundPage from '../NotFoundPage';
+import PaginationControlPanel from '../PaginationControlPanel';
 
 const VMain = ({ fetching: { status }, fetchLocalData, data }) => {
 
@@ -17,7 +18,12 @@ const VMain = ({ fetching: { status }, fetchLocalData, data }) => {
   }, []);
 
   return (
-    <Box>
+    <Box
+      d="flex"
+      flexDirection="column"
+      justifyContent="space-between"
+      h="100vh"
+    >
       <Link to="/">
         <Box d="flex" justifyContent="center">
           <Heading as="h2" size="xl">Home</Heading>
@@ -28,15 +34,15 @@ const VMain = ({ fetching: { status }, fetchLocalData, data }) => {
           {(
             status == 'loading'
               ? <Spinner
-                  thickness="4px"
-                  speed="0.65s"
-                  emptyColor="gray.200"
-                  color="blue.500"
                   size="xl"
+                  speed="0.65s"
+                  thickness="4px"
+                  color="blue.500"
+                  emptyColor="gray.200"
                 />
               : <CardsList />
           )}
-          <NavigationControlPanel />
+          <PaginationControlPanel />
         </Route>
         {(
           data.map((dataItem, i) => (
@@ -48,6 +54,9 @@ const VMain = ({ fetching: { status }, fetchLocalData, data }) => {
             </Route>
           ))
         )}
+        <Route path="*">
+          <NotFoundPage />
+        </Route>
       </Switch>
     </Box>
   )

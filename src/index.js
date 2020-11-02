@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
 import mainReduser from './reducers/mainReduser';
 import fetchLocalData from './sagas/fetchLocalData';
-import { BrowserRouter as Router } from "react-router-dom";
+import { HashRouter as Router } from "react-router-dom";
 import { ThemeProvider, CSSReset } from "@chakra-ui/core";
 
 const sagaMiddleware = createSagaMiddleware();

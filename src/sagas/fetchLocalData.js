@@ -6,7 +6,7 @@ import {
   setFetchingSuccess,
   setFetchingErrored,
   savePlanetsData,
-  setNavigation,
+  setPagination,
 } from '../actions';
 
 const START_URL = 'https://swapi.dev/api/planets/';
@@ -26,7 +26,7 @@ export function* fetchLocalData(actions) {
       const { count, next, previous, results } = result.data;
 
       yield put(savePlanetsData(results));
-      yield put(setNavigation({
+      yield put(setPagination({
         count,
         next,
         previous,

@@ -2,7 +2,7 @@ import {
   SET_FETCHING_STATUS,
   FETCH_LOCAL_DATA,
   SAVE_PLANETS_DATA,
-  SET_NAVIGATION,
+  SET_PAGINATION,
 } from './types';
 
 export const setFetchingLoading = () => ({
@@ -28,7 +28,7 @@ export const savePlanetsData = (payload) => ({
   payload,
 })
 
-export const setNavigation = (payload) => ({
-  type: SET_NAVIGATION,
+export const setPagination = (payload) => ({
+  type: SET_PAGINATION,
   payload,
 })

@@ -1,12 +1,3 @@
 const axios = require('axios');
 
-async function getData(url) {
-  try {
-    const response = await axios.get(url);
-    return response;
-  } catch (error) {
-    console.error(error);
-  }
-}
-
-export default getData;
+export default async (url) => await axios.get(url);

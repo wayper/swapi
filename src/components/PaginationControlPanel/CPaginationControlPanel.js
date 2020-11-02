@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
-import VNavigationControlPanel from './VNavigationControlPanel';
+import VPaginationControlPanel from './VPaginationControlPanel';
 import {
   fetchLocalData,
 } from '../../actions';
 
-const mapStateToProps = ({ navigation }) => {
-  const { next, previous } = navigation;
+const mapStateToProps = ({ pagination }) => {
+  const { next, previous } = pagination;
 
   return ({
     next,
@@ -20,4 +20,4 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(VNavigationControlPanel);
+)(VPaginationControlPanel);

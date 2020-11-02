@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { ButtonGroup, Button } from "@chakra-ui/core";
 
-const VNavigationControlPanel = ({
+const VpaginationControlPanel = ({
   next,
   previous,
   fetchLocalData,
@@ -40,16 +40,16 @@ const VNavigationControlPanel = ({
   );
 }
 
-VNavigationControlPanel.propTypes = {
+VpaginationControlPanel.propTypes = {
   next: PropTypes.string,
   previous: PropTypes.string,
   fetchLocalData: PropTypes.func,
 };
 
-VNavigationControlPanel.defaultProps = {
+VpaginationControlPanel.defaultProps = {
   next: '',
   previous: '',
   fetchLocalData: () => {},
 };
 
-export default VNavigationControlPanel;
+export default VpaginationControlPanel;

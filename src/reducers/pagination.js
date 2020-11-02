@@ -1,10 +1,10 @@
 import {
-  SET_NAVIGATION,
+  SET_PAGINATION,
 } from '../actions/types';
 
 export default (state = {}, { type, payload }) => {
   switch (type) {
-    case SET_NAVIGATION:
+    case SET_PAGINATION:
       return {
         ...payload,
       }
