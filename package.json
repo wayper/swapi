@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint ./datacore-crud-manager-webapp-ui/src",
+    "lint": "eslint ./src",
     "build": "webpack",
     "start": "webpack-dev-server --open"
   },

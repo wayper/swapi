@@ -3,12 +3,18 @@ import PropTypes from 'prop-types';
 import { Switch, Route, Link } from "react-router-dom";
 import { Box, Heading } from "@chakra-ui/core";
 import Loader from '../Loader';
+import Modal from '../Modal';
 import CardsList from '../CardsList';
 import PlanetPage from '../PlanetPage';
 import NotFoundPage from '../NotFoundPage';
 import PaginationControlPanel from '../PaginationControlPanel';
 
-const VMain = ({ fetching: { status }, fetchLocalData, data }) => {
+const VMain = ({
+  fetching: { status },
+  fetchLocalData,
+  data,
+  message,
+}) => {
 
   useEffect(() => {
     fetchLocalData();
@@ -21,6 +27,9 @@ const VMain = ({ fetching: { status }, fetchLocalData, data }) => {
       justifyContent="space-between"
       h="100vh"
     >
+      {(
+        message && <Modal />
+      )}
       <Switch>
         <Route exact path="/">
         <Navigation isHome />
@@ -52,12 +61,14 @@ const VMain = ({ fetching: { status }, fetchLocalData, data }) => {
 };
 
 VMain.propTypes = {
+  message: PropTypes.objectOf(PropTypes.string),
   fetching: PropTypes.objectOf(PropTypes.string),
   data: PropTypes.arrayOf(PropTypes.object),
   fetchLocalData: PropTypes.func,
 };
 
 VMain.defaultProps = {
+  message: {},
   fetching: {},
   data: [],
   fetchLocalData: () => {},
@@ -66,8 +77,10 @@ VMain.defaultProps = {
 function Navigation({ isHome }) {
   return (
     <Link to="/">
-      <Box d="flex" justifyContent="center">
-        <Heading as="h2" size="xl">{isHome ? '' : 'Back to '}Home</Heading>
+      <Box d="flex" justifyContent="center" alignItems="center">
+        <Box>
+          <Heading as="h2" size="xl">{isHome ? '' : 'Back to '}Home</Heading>
+        </Box>
       </Box>
     </Link>
   )

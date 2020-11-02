@@ -7,9 +7,10 @@ import {
   setFetchingErrored,
   savePlanetsData,
   setPagination,
+  setMessage,
 } from '../actions';
 
-const START_URL = 'https://swapi.dev/api/planets/';
+ const START_URL = 'https://swapi.dev/api/planets/';
 
 export function* fetchLocalData(actions) {
 
@@ -22,27 +23,35 @@ export function* fetchLocalData(actions) {
   try {
     const result = yield call(getData, currentUrl);
 
-    if (result) {
-      const { count, next, previous, results } = result.data;
+    const isNotResults = !result || !result.data || !result.data.results;
 
-      yield put(savePlanetsData(results));
-      yield put(setPagination({
-        count,
-        next,
-        previous,
-      }))
+    if (isNotResults) {
+      const errorMessage = 'Failed to get data';
+      yield put(setMessage({
+        text: errorMessage,
+        messageType: 'error',
+      }));
 
-      yield put(setFetchingSuccess());
+      throw Error(errorMessage)
     }
 
+    const { count, next, previous, results } = result.data;
 
+    yield put(savePlanetsData(results));
+    yield put(setPagination({
+      count,
+      next,
+      previous,
+    }))
+
+    yield put(setFetchingSuccess());
   } catch (error) {
-
-    console.log(error);
+    yield put(setMessage({
+      text: error.message,
+      messageType: 'error',
+    }));
 
     yield put(setFetchingErrored());
-
-    // Error message
   }
 }
 
