@@ -77,7 +77,6 @@ function HomePage({ isLoading, fetchLocalData }) {
 function CurrentPlanetPage({ isLoading, fetchPlanetData }) {
   let query = useQuery();
   const url = query.get("url");
-  console.log(url);
 
   useEffect(() => {
     fetchPlanetData({ url });

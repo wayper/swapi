@@ -1,7 +1,4 @@
-import React, { useEffect } from 'react';
-import {
-  useLocation
-} from "react-router-dom";
+import React from 'react';
 import PropTypes from 'prop-types';
 import {
   Box,
@@ -12,7 +9,6 @@ import {
   ListIcon,
   Link,
 } from "@chakra-ui/core";
-import { fetchLocalData } from '../../actions';
 
 const PlanetPage = ({
   name,
@@ -26,8 +22,6 @@ const PlanetPage = ({
 }) => (
   <PlanetPageWrap>
     <Heading as="h2" color="yellow.700">{name}</Heading>
-    <button onClick={() => fetchLocalData(url)}>TEST SAGA</button>
-
     <ItemDescription label="Период оборота:" value={rotation_period}/>
     <ItemDescription label="Диаметр:" value={diameter}/>
     <ItemDescription label="Климат:" value={climate}/>

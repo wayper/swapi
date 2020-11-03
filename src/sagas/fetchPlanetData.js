@@ -12,8 +12,6 @@ import {
 export function* fetchPlanetData({ payload }) {
   const ifNotHaveURL = !payload && !!payload.url;
 
-  console.log(payload)
-
   if (ifNotHaveURL) {
     throw Error('not have url for loading');
   }
@@ -22,7 +20,6 @@ export function* fetchPlanetData({ payload }) {
 
   try {
     const result = yield call(getData, payload.url);
-    console.log(result);
 
     const isNotResults = !result || !result.data;
 

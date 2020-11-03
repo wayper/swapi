@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
 
-import { fetchPlanetData } from '../../actions';
 import PlanetPage from './PlanetPage';
 
 const mapStateToProps = ({ activePlanet }) => {
@@ -27,11 +26,6 @@ const mapStateToProps = ({ activePlanet }) => {
   });
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  fetchPlanetData: (url) => dispatch(fetchPlanetData(url)),
-})
-
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
 )(PlanetPage);
