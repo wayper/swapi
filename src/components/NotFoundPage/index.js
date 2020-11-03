@@ -1,1 +1,1 @@
-export { default } from './VNotFoundPage';
+export { default } from './NotFoundPage';

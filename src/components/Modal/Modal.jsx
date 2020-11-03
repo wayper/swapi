@@ -5,7 +5,7 @@ import {
   Box,
 } from "@chakra-ui/core";
 
-const VModal = ({ text, clearMessage }) => (
+const Modal = ({ text, clearMessage }) => (
   <Box zIndex={1000} d="flex" justifyContent="center" alignItems="center" w="100%" h="100vh" position="absolute">
     <Box zIndex={2000} bg="white" p={5}>
       <Box minWidth="300px" pt={3} pb={3}>{text}</Box>
@@ -22,14 +22,14 @@ const VModal = ({ text, clearMessage }) => (
   </Box>
 );
 
-VModal.propTypes = {
+Modal.propTypes = {
   text: PropTypes.string,
   clearMessage: PropTypes.func,
 };
 
-VModal.defaultProps = {
+Modal.defaultProps = {
   text: '',
   clearMessage: () => {},
 };
 
-export default VModal;
+export default Modal;

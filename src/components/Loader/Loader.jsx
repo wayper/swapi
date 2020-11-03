@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Spinner } from "@chakra-ui/core";
 
-const VLoader = () => (
+const Loader = () => (
   <Box
     d="flex"
     justifyContent="center"
@@ -18,4 +18,4 @@ const VLoader = () => (
   </Box>
 );
 
-export default VLoader;
+export default Loader;

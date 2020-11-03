@@ -3,10 +3,8 @@ import PropTypes from 'prop-types';
 import { Box } from "@chakra-ui/core";
 import PlanetCard from '../PlanetCard';
 
-const regexp = /\D/g;
-
-const VCardsList = ({ data }) => {
-  const list = data.map(({
+const CardsList = ({ planetsData }) => {
+  const list = planetsData.map(({
     url,
     name,
     climate,
@@ -14,12 +12,13 @@ const VCardsList = ({ data }) => {
   }, i) => (
     <PlanetCard
       key={`card-${i}`}
-      id={url.replace(regexp, "")}
+      url={url}
       name={name}
       climate={climate}
       population={population}
     />
   ))
+
   return (
     <Box flexGrow={1} overflow="auto">
       {list}
@@ -27,12 +26,14 @@ const VCardsList = ({ data }) => {
   );
 }
 
-VCardsList.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object),
+CardsList.propTypes = {
+  planetsData: PropTypes.arrayOf(PropTypes.object),
+  fetchLocalData: PropTypes.func,
 };
 
-VCardsList.defaultProps = {
-  data: [],
+CardsList.defaultProps = {
+  planetsData: [],
+  fetchLocalData: () => {},
 };
 
-export default VCardsList;
+export default CardsList;

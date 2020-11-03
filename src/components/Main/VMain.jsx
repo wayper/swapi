@@ -1,25 +1,46 @@
 import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
 import { Switch, Route, Link } from "react-router-dom";
 import { Box, Heading } from "@chakra-ui/core";
+import { propTypes, defaultProps } from './props';
 import Loader from '../Loader';
 import Modal from '../Modal';
 import CardsList from '../CardsList';
 import PlanetPage from '../PlanetPage';
 import NotFoundPage from '../NotFoundPage';
 import PaginationControlPanel from '../PaginationControlPanel';
+import { useLocation } from "react-router-dom";
+
+const START_URL = 'https://swapi.dev/api/planets/';
 
 const VMain = ({
-  fetching: { status },
-  fetchLocalData,
-  data,
+  isLoading,
   message,
-}) => {
+  fetchLocalData,
+  fetchPlanetData,
+}) => (
+  <MainWrap>
+    {( message && <Modal /> )}
+    <Switch>
+      <Route exact path="/">
+        <HomePage
+        isLoading={isLoading}
+        fetchLocalData={fetchLocalData}
+      />
+      </Route>
+      <Route path="/planet">
+        <CurrentPlanetPage
+          isLoading={isLoading}
+          fetchPlanetData={fetchPlanetData}
+        />
+      </Route>
+      <Route path="*">
+        <NoMathPage />
+      </Route>
+    </Switch>
+  </MainWrap>
+);
 
-  useEffect(() => {
-    fetchLocalData();
-  }, []);
-
+function MainWrap({ children }) {
   return (
     <Box
       d="flex"
@@ -27,52 +48,61 @@ const VMain = ({
       justifyContent="space-between"
       h="100vh"
     >
-      {(
-        message && <Modal />
-      )}
-      <Switch>
-        <Route exact path="/">
-        <Navigation isHome />
-          {(
-            status == 'loading'
-              ? <Loader />
-              : <CardsList />
-          )}
-          <PaginationControlPanel />
-        </Route>
-        {(
-          data.map((dataItem, i) => (
-            <Route
-              key={`page-${i}`}
-              path={`/planet-page/${dataItem.id}`}
-            >
-              <Navigation />
-              <PlanetPage { ...dataItem } />
-            </Route>
-          ))
-        )}
-        <Route path="*">
-          <Navigation />
-          <NotFoundPage />
-        </Route>
-      </Switch>
+      {children}
     </Box>
   )
-};
+}
 
-VMain.propTypes = {
-  message: PropTypes.objectOf(PropTypes.string),
-  fetching: PropTypes.objectOf(PropTypes.string),
-  data: PropTypes.arrayOf(PropTypes.object),
-  fetchLocalData: PropTypes.func,
-};
+function HomePage({ isLoading, fetchLocalData }) {
+  const query = useQuery();
+  const url = query.get("url") || START_URL;
 
-VMain.defaultProps = {
-  message: {},
-  fetching: {},
-  data: [],
-  fetchLocalData: () => {},
-};
+  useEffect(() => {
+    fetchLocalData({ url });
+  }, [url]);
+
+  return (
+    <>
+      <Navigation isHome />
+      {(
+        isLoading
+          ? <Loader />
+          : <CardsList url={url}/>
+      )}
+      <PaginationControlPanel />
+    </>
+  )
+}
+
+function CurrentPlanetPage({ isLoading, fetchPlanetData }) {
+  let query = useQuery();
+  const url = query.get("url");
+  console.log(url);
+
+  useEffect(() => {
+    fetchPlanetData({ url });
+  }, []);
+
+  return (
+    <>
+      <Navigation />
+      {(
+      isLoading
+        ? <Loader />
+        : <PlanetPage />
+      )}
+    </>
+  )
+}
+
+function NoMathPage() {
+  return (
+    <>
+      <Navigation />
+      <NotFoundPage />
+    </>
+  )
+}
 
 function Navigation({ isHome }) {
   return (
@@ -86,12 +116,23 @@ function Navigation({ isHome }) {
   )
 }
 
-Navigation.propTypes = {
-  isHome: PropTypes.bool,
-};
+function useQuery() {
+  return new URLSearchParams(useLocation().search);
+}
 
-Navigation.defaultProps = {
-  isHome: false,
-};
+VMain.propTypes = propTypes;
+VMain.defaultProps = defaultProps;
+
+MainWrap.propTypes = propTypes;
+MainWrap.defaultProps = defaultProps;
+
+HomePage.propTypes = propTypes;
+HomePage.defaultProps = defaultProps;
+
+CurrentPlanetPage.propTypes = propTypes;
+CurrentPlanetPage.defaultProps = defaultProps;
+
+Navigation.propTypes = propTypes;
+Navigation.defaultProps = defaultProps;
 
 export default VMain;

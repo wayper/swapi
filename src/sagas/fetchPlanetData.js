@@ -1,17 +1,18 @@
 import { takeLatest, put, call } from 'redux-saga/effects';
 import getData from '../utils/getData';
-import { FETCH_LOCAL_DATA } from '../actions/types';
+import { FETCH_PLANET_DATA } from '../actions/types';
 import {
   setFetchingLoading,
   setFetchingSuccess,
   setFetchingErrored,
-  savePlanetsData,
-  setPagination,
+  setActivePlanet,
   setMessage,
 } from '../actions';
 
-export function* fetchLocalData({ payload }) {
-  const ifNotHaveURL = !payload || !payload.url;
+export function* fetchPlanetData({ payload }) {
+  const ifNotHaveURL = !payload && !!payload.url;
+
+  console.log(payload)
 
   if (ifNotHaveURL) {
     throw Error('not have url for loading');
@@ -21,21 +22,15 @@ export function* fetchLocalData({ payload }) {
 
   try {
     const result = yield call(getData, payload.url);
+    console.log(result);
 
-    const isNotResults = !result || !result.data || !result.data.results;
+    const isNotResults = !result || !result.data;
 
     if (isNotResults) {
       throw Error('Failed to get data')
     }
 
-    const { count, next, previous, results } = result.data;
-
-    yield put(savePlanetsData(results));
-    yield put(setPagination({
-      count,
-      next,
-      previous,
-    }))
+    yield put(setActivePlanet(result.data));
 
     yield put(setFetchingSuccess());
   } catch (error) {
@@ -49,5 +44,5 @@ export function* fetchLocalData({ payload }) {
 }
 
 export default function* () {
- yield takeLatest(FETCH_LOCAL_DATA, fetchLocalData);
+ yield takeLatest(FETCH_PLANET_DATA, fetchPlanetData);
 }

@@ -5,7 +5,7 @@ import {
   Text,
 } from "@chakra-ui/core";
 
-const VNotFoundPage = () => (
+const NotFoundPage = () => (
   <Box
     d="flex"
     flexDirection="column"
@@ -50,4 +50,4 @@ const VNotFoundPage = () => (
   </Box>
 );
 
-export default VNotFoundPage;
+export default NotFoundPage;

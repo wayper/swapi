@@ -1,6 +1,6 @@
 import { SET_FETCHING_STATUS } from '../actions/types';
 
-export default (state = { status: 'loading' }, { type, payload }) => {
+export default (state = { status: 'success' }, { type, payload }) => {
   switch (type) {
     case SET_FETCHING_STATUS:
       return {

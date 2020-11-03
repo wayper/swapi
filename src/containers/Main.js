@@ -2,20 +2,20 @@ import VMain from '../components/Main/VMain';
 import { connect } from 'react-redux';
 import {
   fetchLocalData,
+  fetchPlanetData,
 } from '../actions';
 
-const mapStateToProps = ({ fetching, planetsData, message }) => {
-  const data = planetsData || [];
+const mapStateToProps = ({ fetching: { status }, message }) => {
+  const isLoading = status == 'loading';
 
   return ({
-    data,
+    isLoading,
     message,
-    fetching,
   });
 };
-
 const mapDispatchToProps = (dispatch) => ({
-  fetchLocalData: () => dispatch(fetchLocalData()),
+  fetchLocalData: ({ url }) => dispatch(fetchLocalData({ url })),
+  fetchPlanetData: ({ url }) => dispatch(fetchPlanetData({ url })),
 });
 
 export default connect(
